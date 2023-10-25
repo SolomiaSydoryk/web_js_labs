@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games</title>
+
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header1">
+        <h2 id="tname">My Entertainment</h2>
+        <button id="showGames">My Games</button>
+        <button id="createGame">Create Game</button>
+      </div>
+      <div class="header2">
+        <label for="find_input">
+          <input
+            id="find_input"
+            type="text"
+            class="form-header"
+            placeholder="Type name of game..."
+          />
+        </label>
+        <button id="search_button" type="button" onclick="searchGame()">
+          Search
+        </button>
+        <button id="clear_button" type="button" onclick="clearSearch()">
+          Clear
+        </button>
+      </div>
+    </header>
+    <div class="container">
+      <div class="left-content">
+        <div class="manage_container">
+          <h2>Manage Game</h2>
+          <div id="sort">
+            <p>Sort by newest games</p>
+            <button id="sort_button" type="button" onclick="sortByPrice()">
+              Sort
+            </button>
+          </div>
+          <br />
+          <div class="strip"></div>
+          <div id="cost">
+            <p>Count the total cost of the games:</p>
+            <button
+              id="count_button"
+              type="button"
+              onclick="calculateTotalPrice(searchResults)"
+            >
+              Count
+            </button>
+            <p id="totalPrice">Total Price: 0</p>
+          </div>
+          <div class="strip"></div>
+        </div>
+
+        <div class="create_container">
+          <form id="gameForm">
+            <h2>Create Game</h2>
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="Text..."/>
+            <label for="description">Description</label>
+            <textarea id="description" cols="25" rows="8"></textarea>
+            <label for="price">Price</label>
+            <input type="text" id="price" required placeholder=""/>
+            <label for="type">Type</label>
+            <select id="type">
+              <option value="" disabled selected>Select Game Type</option>
+              <option value="Board Game">Board Game</option>
+              <option value="Computer Game">Computer Game</option>
+              <option value="Video Game">Video Game</option>
+              <option value="Mobile Game">Mobile Game</option>
+            </select>
+            <button type="button" id="submit_button" onclick="addGame()">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="right-content">
+        <main id="list">
+          <h2>Game List</h2>
+          <div id="game-list"></div>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>
