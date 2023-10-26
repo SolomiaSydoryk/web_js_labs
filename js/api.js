@@ -1,7 +1,7 @@
-const BASE_URL = `http://localhost:5500/api`;
+const BASE_URL = `http://localhost:8080/api`;
 const RESOURSE_URL = `${BASE_URL}/game`;
 
-const baseRequest = async ({ urlPath  = "", method = "GET", body = null }) => {
+const baseRequest = async ({ urlPath = "", method = "GET", body = null }) => {
   try {
     const reqParams = {
       method,
@@ -13,7 +13,7 @@ const baseRequest = async ({ urlPath  = "", method = "GET", body = null }) => {
     if (body) {
       reqParams.body = JSON.stringify(body);
     }
-    return await fetch(`${RESOURSE_URL}${urlPath }`, reqParams);
+    return await fetch(`${RESOURSE_URL}${urlPath}`, reqParams);
   } catch (error) {
     console.error("HTTP ERROR: ", error);
   }
@@ -34,8 +34,7 @@ export const getSortedGames = async () => {
 export const postGame = (body) => baseRequest({ method: "POST", body });
 
 export const updateGame = (id, body) =>
-  baseRequest({ urlPath : `/${id}`, method: "PATCH", body });
+  baseRequest({ urlPath: `/${id}`, method: "PUT", body });
 
-  export const deleteGameById = (id) =>
-  baseRequest({ urlPath : `/${id}`, method: "DELETE" });
-
+export const deleteGameById = (id) =>
+  baseRequest({ urlPath: `/${id}`, method: "DELETE" });

@@ -31,19 +31,19 @@ class GameController {
 
   async updateGames(req, res) {
     const { id, name, price, description, type } = req.body;
-    const updateGame = await db.query(
+    const game = await db.query(
       `UPDATE games SET name = $1, description=$2, price = $3, type = $4 WHERE id = $5 RETURNING *`,
       [name, description, price, type, id]
     );
-    res.json(updateGame.rows[0]);
+    res.json(game.rows[0]);
   }
 
   async deleteGame(req, res) {
     const id = req.params.id;
-    const deleteGame = await db.query(`DELETE FROM games WHERE id = $1`, 
+    const game = await db.query(`DELETE FROM games WHERE id = $1`, 
     [id]
     );
-    res.json(deleteGame.rows[0]);
+    res.json(game.rows[0]);
   }
 }
 

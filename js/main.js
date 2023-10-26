@@ -5,10 +5,16 @@ let searchResults = games.slice();
 let sortGames = false;
 
 const saveGame = () => {
-    const name = document.getElementById("name").value;
-    const description = document.getElementById("description").value;
-    const price = parseFloat(document.getElementById("price").value);
-    const type = document.getElementById("type").value;
+    const nameInput = document.getElementById("name");
+    const descriptionInput = document.getElementById("description");
+    const priceInput = document.getElementById("price");
+    const typeInput = document.getElementById("type");
+    const findInput = document.getElementById("find_input");
+
+    const name = nameInput.value;
+    const description = descriptionInput.value;
+    const price = parseFloat(priceInput.value);
+    const type = typeInput.value;
 
     if (name.trim() === "" || description.trim() === "" || isNaN(price) || type.trim() === "") {
         alert("Будь ласка, заповніть всі поля.");
@@ -36,15 +42,11 @@ const saveGame = () => {
         type: type
     };
 
-    const findInput = document.getElementById("find_input").value.toLowerCase();
-
-    if (findInput.trim() === "") {
-        searchResults = games.slice();
-    } else {
-        searchResults = games.filter((game) => {
-            return game.name.toLowerCase().includes(findInput);
-        });
-    }
+    nameInput.value = "";
+    descriptionInput.value = "";
+    priceInput.value = "";
+    typeInput.value = "";
+    findInput.value = "";
 
     postGame(game)
         .then(() => {
@@ -54,6 +56,12 @@ const saveGame = () => {
             console.error("Error while saving the game: ", error);
         });
 };
+
+const submitButton = document.getElementById("submit_button");
+
+submitButton.addEventListener("click", () => {
+    saveGame();
+});
 
 function sortByPrice() {
     sortGames = !sortGames;
@@ -148,5 +156,11 @@ function deleteGame(id) {
             console.error("Error while deleting the game: ", error);
         });
 }
+
+const deleteButton = document.getElementsByClassName("delete_button");
+
+deleteButton.addEventListener("click", () => {
+    deleteGame(id);
+});
 
 displayAllGames();
