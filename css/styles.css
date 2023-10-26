@@ -198,7 +198,7 @@ select,
 .right-content {
   width: 65%;
 }
-.game-item {
+.game-info {
   border: 1px solid #4a4a4a;
   background-color: #cececed7;
   border-radius: 10px;
@@ -209,7 +209,7 @@ select,
   vertical-align: top;
   box-sizing: border-box;
 }
-.game-item button {
+.game-info button {
   color: #fff;
   border: none;
   border-radius: 5px;
