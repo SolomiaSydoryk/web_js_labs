@@ -7,7 +7,9 @@ class GameController {
       `INSERT INTO games (name, description, price, type) VALUES ($1, $2, $3, $4) RETURNING *`,
       [name, description, price, type]
     );
-    res.json(newGame.rows[0]);
+
+    const allGames = await db.query(`SELECT * FROM games`);
+    res.json(allGames.rows);
   }
 
   async getAllGames(req, res) {

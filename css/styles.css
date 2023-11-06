@@ -216,15 +216,15 @@ select,
   padding: 5px 10px;
   cursor: pointer;
   width: 30%;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 .delete_button {
   background-color: #a30a0a;
+  margin-right: 10%;
 }
 .edit_button {
   background-color: #0061cf;
-  margin-right: 20%;
+  margin-left: 10%;
+  margin-right: 15%;
 }
 .modal {
   display: none;

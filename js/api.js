@@ -25,7 +25,7 @@ export const getAllGames = async () => {
 };
 export const getSortedGames = async () => {
   const rawResponse = await baseRequest({
-    pathUrl: `/sortgame`,
+    urlPath: `/sortgame`,
     method: "GET",
   });
   return rawResponse.json();
