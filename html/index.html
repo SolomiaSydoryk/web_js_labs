@@ -37,7 +37,7 @@
         <div class="manage_container">
           <h2>Manage Game</h2>
           <div id="sort">
-            <p>Sort by newest games</p>
+            <p>Sort games by price</p>
             <button id="sort_button" type="button" onclick="sortByPrice()">
               Sort
             </button>
@@ -49,7 +49,7 @@
             <button
               id="count_button"
               type="button"
-              onclick="calculateTotalPrice(searchResults)"
+              onclick="calculateTotalPrice()"
             >
               Count
             </button>
@@ -81,7 +81,7 @@
               <option value="Video Game">Video Game</option>
               <option value="Mobile Game">Mobile Game</option>
             </select>
-            <button type="button" id="submit_button" onclick="addGame()">
+            <button type="button" id="submit_button" onclick="saveGame()">
               Submit
             </button>
           </form>
@@ -128,6 +128,7 @@
         </div>
       </div>
     </div>
+    <script type="module" src="../js/api.js"></script>
     <script type="module" src="../js/main.js"></script>
   </body>
 </html>

@@ -1,236 +1,271 @@
+import { getAllGames,updateGame, postGame, deleteGameById } from "./api.js";
+
 let games = [];
+let searchResults = games.slice();
+let editingGameId = null;
 
-function addGame() {
-  const name = document.getElementById("name").value;
-  const description = document.getElementById("description").value;
-  const price = parseFloat(document.getElementById("price").value);
-  const type = document.getElementById("type").value;
 
-  if (!name || isNaN(price) || !type) {
-    alert("Please fill in all required fields and enter a valid price.");
-    return;
-  }
+const saveGame = () => {
+    const nameInput = document.getElementById("name");
+    const descriptionInput = document.getElementById("description");
+    const priceInput = document.getElementById("price");
+    const typeInput = document.getElementById("type");
+    const findInput = document.getElementById("find_input");
 
-  const game = {
-    name: name,
-    description: description,
-    price: price,
-    type: type,
-  };
+    const name = nameInput.value;
+    const description = descriptionInput.value;
+    const price = parseFloat(priceInput.value);
+    const type = typeInput.value;
 
-  games.push(game);
+    if (name.trim() === "" || description.trim() === "" || isNaN(price) || type.trim() === "") {
+        alert("Будь ласка, заповніть всі поля.");
+        return;
+    }
 
-  document.getElementById("name").value = "";
-  document.getElementById("description").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("type").value = "";
-
-  displayGames();
-}
-
-function displayGames() {
-  const gameContainer = document.getElementById("game-list");
-
-  gameContainer.innerHTML = "";
-
-  games.forEach((game, index) => {
-    const gameDiv = document.createElement("div");
-    gameDiv.classList.add("game-item");
-
-    const gameInfo = `
-      <h3>${game.name}</h3>
-      <p>Description: ${game.description}</p>
-      <p>Price: $${game.price.toFixed(2)}</p>
-      <p>Type: ${game.type}</p>
-    `;
-
-    gameDiv.innerHTML = gameInfo;
-
-    const editButton = document.createElement("button");
-    editButton.classList.add("edit_button");
-    editButton.textContent = "Edit";
-    editButton.addEventListener("click", () => {
-      openEditModal(index);
+    const duplicateGame = games.find(game => {
+        return (
+            game.name === name &&
+            game.description === description &&
+            parseFloat(game.price) === price &&
+            game.type === type
+        );
     });
 
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("delete_button");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => {
-      gameContainer.removeChild(gameDiv);
-      games.splice(games.indexOf(game), 1);
+    if (duplicateGame) {
+        alert("Така гра вже існує.");
+        return;
+    }
+
+    const game = {
+        name: name,
+        description: description,
+        price: price,
+        type: type
+    };
+
+    nameInput.value = "";
+    descriptionInput.value = "";
+    priceInput.value = "";
+    typeInput.value = "";
+    findInput.value = "";
+
+    postGame(game)
+        return baseRequest({ method: "POST", body })
+        .then((data) => {
+            console.log(data);
+            games = disGames;
+        searchResults = games.slice();
+        console.log(games);
+        displayGames(games);
+        })
+        .catch((error) => {
+            console.error("Error while saving the game: ", error);
+        });
+};
+
+const submitButton = document.getElementById("submit_button");
+
+submitButton.addEventListener("click", () => {
+    saveGame();
+});
+
+function displayGames(gamesToDisplay) {
+    const gamesList = document.getElementById("game-list");
+    gamesList.innerHTML = "";
+
+    gamesToDisplay.forEach((game) => {
+        const gameInfo = document.createElement("div");
+        gameInfo.classList.add("game-info");
+
+        gameInfo.innerHTML = `
+            <h3>${game.name}</h3>
+            <p><strong>Description:</strong> ${game.description}</p>
+            <p><strong>Price:</strong> ${game.price}</p>
+            <p><strong>Type:</strong> ${game.type}</p>
+            <button type="button" class="edit_button" data-id="${game.id}">Edit</button>
+            <button type="button" class="delete_button" onclick="deleteGame(${game.id})">Delete</button>
+        `;
+
+        gamesList.appendChild(gameInfo);
     });
-
-    gameDiv.appendChild(editButton);
-    gameDiv.appendChild(deleteButton);
-
-    gameContainer.appendChild(gameDiv);
-  });
+    attachEditButtonEvents();
+    attachDeleteButtonEvents();
 }
+
+const displayAllGames = async () => {
+    try {
+        const disGames = await getAllGames();
+        games = disGames;
+        searchResults = games.slice();
+        console.log(games);
+        displayGames(games);
+    } catch (error) {
+        console.error("Error while fetching games: ", error);
+    }
+};
 
 function sortByPrice() {
-  const searchInput = document.getElementById("find_input").value.trim().toLowerCase();
-
-  if (searchInput === "") {
-    games.sort((a, b) => b.price - a.price);
-  } else {
-    const searchResults = games.filter((game) =>
-      game.name.toLowerCase().includes(searchInput)
-    );
-
     searchResults.sort((a, b) => b.price - a.price);
-    displaySearchResults(searchResults);
-    return;
-  }
-
-  displayGames();
+    displayGames(searchResults);
 }
 
+const sortButton = document.getElementById("sort_button");
+
+sortButton.addEventListener("click", sortByPrice);
 
 function calculateTotalPrice() {
-  const totalPriceElement = document.getElementById("totalPrice");
-  let total = 0;
+    let totalPrice = 0;
 
-  const searchInput = document.getElementById("find_input").value.trim().toLowerCase();
+    const gameListToCalculate = searchResults.length > 0 ? searchResults : games;
 
-  if (searchInput === "") {
-    total = games.reduce((tot, game) => tot + game.price, 0);
-  } else {
-    const searchResults = games.filter((game) =>
-      game.name.toLowerCase().includes(searchInput)
-    );
+    gameListToCalculate.forEach((game) => {
+        totalPrice += parseFloat(game.price);
+    });
 
-    total = searchResults.reduce((tot, game) => tot + game.price, 0);
-  }
-
-  totalPriceElement.textContent = `Total Price: $${total.toFixed(2)}`;
+    const totalPriceElement = document.getElementById("totalPrice");
+    totalPriceElement.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
 }
+
+const countButton = document.getElementById("count_button");
+
+countButton.addEventListener("click", calculateTotalPrice);
 
 
 function searchGame() {
-  const searchInput = document.getElementById("find_input").value.trim().toLowerCase();
-  if (searchInput === "") {
-    displayGames();
-    return;
-  }
+    const findInput = document.getElementById("find_input").value.toLowerCase();
 
-  const searchResults = games.filter((game) =>
-    game.name.toLowerCase().includes(searchInput)
-  );
-  displaySearchResults(searchResults);
+    if (findInput.trim() === "") {
+        searchResults = games.slice();
+    } else {
+        searchResults = games.filter((game) => {
+            return game.name.toLowerCase().includes(findInput);
+        });
+    }
+
+    displayGames(searchResults);
 }
 
-function displaySearchResults(searchResults) {
-  const gameContainer = document.getElementById("game-list");
-  gameContainer.innerHTML = "";
+const searchButton = document.getElementById("search_button");
 
-  if (searchResults.length === 0) {
-    gameContainer.innerHTML = "<p>No matching games found.</p>";
-  } else {
-    searchResults.forEach((game, index) => {
-      const gameDiv = document.createElement("div");
-      gameDiv.classList.add("game-item");
-
-      const gameInfo = `
-        <h3>${game.name}</h3>
-        <p>Description: ${game.description}</p>
-        <p>Price: $${game.price.toFixed(2)}</p>
-        <p>Type: ${game.type}</p>
-      `;
-
-      gameDiv.innerHTML = gameInfo;
-      const editButton = document.createElement("button");
-      editButton.classList.add("edit_button");
-      editButton.textContent = "Edit";
-      editButton.addEventListener("click", () => {
-        openEditModal(games.indexOf(game));
-      });
-  
-      const deleteButton = document.createElement("button");
-      deleteButton.classList.add("delete_button");
-      deleteButton.textContent = "Delete";
-      deleteButton.addEventListener("click", () => {
-        gameContainer.removeChild(gameDiv);
-        games.splice(games.indexOf(game), 1);
-      });
-  
-      gameDiv.appendChild(editButton);
-      gameDiv.appendChild(deleteButton);
-  
-      gameContainer.appendChild(gameDiv);
-    });
-  }
-}
+searchButton.addEventListener("click", () => {
+    searchGame();
+});
 
 
 function clearSearch() {
-  const searchInput = document.getElementById("find_input");
-  searchInput.value = "";
+    document.getElementById("find_input").value = "";
+    searchResults = games.slice();
 
-  displayGames();
+    displayGames(searchResults);
 }
 
-document.getElementById("clear_button").addEventListener("click", clearSearch);
-document.getElementById("search_button").addEventListener("click", searchGame);
-document.getElementById("count_button").addEventListener("click", calculateTotalPrice);
-document.getElementById("submit_button").addEventListener("click", addGame);
-document.getElementById("sort_button").addEventListener("click", sortByPrice);
+const clearButton = document.getElementById("clear_button");
 
-displayGames();
+clearButton.addEventListener("click", () => {
+    clearSearch();
+});
 
-const modal = document.getElementById("myModal");
+function deleteGame(id) {
+    deleteGameById(id)
+        .then(() => {
+            displayAllGames();
+        })
+        .catch((error) => {
+            console.error("Error while deleting the game: ", error);
+        });
+}
+
+function attachDeleteButtonEvents() {
+    const deleteButtons = document.getElementsByClassName("delete_button");
+    for (let i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener("click", function() {
+            const gameId = games[i].id;
+            return function() {
+                deleteGame(gameId);
+            };
+        }());
+    }
+}
+
+function attachEditButtonEvents() {
+    const editButtons = document.getElementsByClassName("edit_button");
+    for (let i = 0; i < editButtons.length; i++) {
+      editButtons[i].addEventListener("click", function () {
+        const gameId = editButtons[i].getAttribute("data-id");
+        editGame(gameId);
+      });
+    }
+  }
+
+const editModal = document.getElementById("myModal");
 const editNameInput = document.getElementById("edit-name");
 const editDescriptionInput = document.getElementById("edit-description");
 const editPriceInput = document.getElementById("edit-price");
 const editTypeSelect = document.getElementById("edit-type");
 const saveButton = document.getElementById("save_button");
-let indexOfEditedGame = null;
+const cancelButton = document.getElementById("cancel_button");
+const closeButton = document.querySelector(".close");
 
-function openEditModal(index) {
-  indexOfEditedGame = index;
-  const gameToEdit = games[index];
+function editGame(id) {
+    editingGameId = parseInt(id);
 
-  editNameInput.value = gameToEdit.name;
-  editDescriptionInput.value = gameToEdit.description;
-  editPriceInput.value = gameToEdit.price;
-  editTypeSelect.value = gameToEdit.type;
+    const gameToEdit = games.find(game => game.id === editingGameId);
 
-  modal.style.display = "block";
+    if (gameToEdit) {
+        editNameInput.value = gameToEdit.name;
+        editDescriptionInput.value = gameToEdit.description;
+        editPriceInput.value = gameToEdit.price;
+        editTypeSelect.value = gameToEdit.type;
+    
+        editModal.style.display = "block";
+      } else {
+        console.error("Гру не знайдено");
+      }
 }
 
-function saveEditedGame() {
-  const editedGame = {
-    name: editNameInput.value,
-    description: editDescriptionInput.value,
-    price: parseFloat(editPriceInput.value),
-    type: editTypeSelect.value,
-  };
+saveButton.addEventListener("click", () => {
+    const newName = editNameInput.value;
+    const newDescription = editDescriptionInput.value;
+    const newPrice = parseFloat(editPriceInput.value);
+    const newType = editTypeSelect.value;
 
-  if (!editedGame.name || !editedGame.price || !editedGame.type) {
-    alert("Please fill in all required fields.");
-    return;
-  }
+    if (newName.trim() === "" || newDescription.trim() === "" || isNaN(newPrice) || newType.trim() === "") {
+        alert("Будь ласка, заповніть всі поля.");
+        return;
+    }
 
-  games[indexOfEditedGame] = editedGame;
+    const updatedGame = {
+        id: editingGameId,
+        name: newName,
+        description: newDescription,
+        price: newPrice,
+        type: newType
+    };
 
-  modal.style.display = "none";
-
-  displayGames();
-}
-
-saveButton.addEventListener("click", saveEditedGame);
-
-const closeModalButton = document.querySelector(".close");
-closeModalButton.addEventListener("click", () => {
-  modal.style.display = "none";
+    updateGame(editingGameId, updatedGame)
+        .then(() => {
+            displayAllGames();
+            editModal.style.display = "none";
+        })
+        .catch((error) => {
+            console.error("Помилка під час оновлення гри: ", error);
+        });
 });
 
-const cancelButton = document.getElementById("cancel_button");
-cancelButton.addEventListener("click", cancelEdit);
+cancelButton.addEventListener("click", () => {
+    editNameInput.value = "";
+    editDescriptionInput.value = "";
+    editPriceInput.value = "";
+    editTypeSelect.value = "";
+});
 
-function cancelEdit() {
-  editNameInput.value = "";
-  editDescriptionInput.value = "";
-  editPriceInput.value = "";
-  editTypeSelect.value = "";
-}
+closeButton.addEventListener("click", () => {
+    editModal.style.display = "none";
+});
+
+
+attachEditButtonEvents()
+
+attachDeleteButtonEvents();
+
+displayAllGames();
