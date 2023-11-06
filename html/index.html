@@ -45,7 +45,7 @@
           <br />
           <div class="strip"></div>
           <div id="cost">
-            <p>Count the total cost of the games:</p>
+            <h3>Count the total cost of the games:</h3>
             <button
               id="count_button"
               type="button"
@@ -62,11 +62,17 @@
           <form id="gameForm">
             <h2>Create Game</h2>
             <label for="name">Name</label>
-            <input type="text" id="name" required placeholder="Text..."/>
+            <input type="text" id="name" required placeholder="Text..." />
             <label for="description">Description</label>
             <textarea id="description" cols="25" rows="8"></textarea>
-            <label for="price">Price</label>
-            <input type="text" id="price" required placeholder=""/>
+            <label for="price">Price ($)</label>
+            <input
+              type="text"
+              id="price"
+              required
+              title="Please enter only numbers"
+            />
+
             <label for="type">Type</label>
             <select id="type">
               <option value="" disabled selected>Select Game Type</option>
@@ -86,6 +92,40 @@
           <h2>Game List</h2>
           <div id="game-list"></div>
         </main>
+      </div>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edit Game</h2>
+        <label for="edit-name">New Name</label>
+        <input
+          type="text"
+          id="edit-name"
+          required
+          placeholder="Enter new name..."
+        />
+        <label for="edit-description">New Description</label>
+        <textarea id="edit-description" cols="25" rows="8"></textarea>
+        <label for="edit-price">New Price ($)</label>
+        <input
+          type="text"
+          id="edit-price"
+          required
+          placeholder="Enter new price..."
+        />
+        <label for="edit-type">New Type</label>
+        <select id="edit-type">
+          <option value="" disabled selected>Select Game Type</option>
+          <option value="Board Game">Board Game</option>
+          <option value="Computer Game">Computer Game</option>
+          <option value="Video Game">Video Game</option>
+          <option value="Mobile Game">Mobile Game</option>
+        </select>
+        <div class="modal-button">
+          <button type="button" id="save_button">Save</button>
+          <button type="button" id="cancel_button">Cancel</button>
+        </div>
       </div>
     </div>
     <script type="module" src="../js/main.js"></script>

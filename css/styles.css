@@ -89,12 +89,14 @@ header {
   cursor: pointer;
 }
 #search_button {
-  border-color: rgb(11, 95, 221);
   color: rgb(11, 95, 221);
+  border-style: none;
+  border: 2px solid rgb(11, 95, 221);
 }
 #clear_button {
-  border-color: rgb(189, 4, 4);
   color: rgb(189, 4, 4);
+  border-style: none;
+  border: 2px solid rgb(189, 4, 4);
 }
 h2 {
   height: auto;
@@ -155,20 +157,28 @@ label {
 }
 label,
 textarea,
-select, #price, #name, #submit_button {
+select,
+#price,
+#name,
+#submit_button {
   margin-left: 13%;
   display: block;
 }
-#name, #description, #price, #type, #submit_button{
+#name,
+#description,
+#price,
+#type,
+#submit_button {
   margin-bottom: 18px;
   padding: 8px;
   width: 70%;
 }
-#type, #submit_button{
+#type,
+#submit_button {
   width: 75%;
   margin-bottom: 30px;
 }
-#submit_button{
+#submit_button {
   background-color: #9e3b06;
   color: white;
   padding: 10px 30px;
@@ -179,25 +189,25 @@ select, #price, #name, #submit_button {
 .container {
   display: flex;
   justify-content: space-between;
-  padding: 20px; 
+  padding: 20px;
 }
 .left-content {
-  width: 35%;   
+  width: 35%;
   margin-right: 70px;
 }
 .right-content {
-  width: 65%; 
+  width: 65%;
 }
 .game-item {
-  border: 1px solid #4a4a4a; 
+  border: 1px solid #4a4a4a;
   background-color: #cececed7;
   border-radius: 10px;
-  padding: 15px; 
-  margin: 20px 40px; 
-  width: 40%; 
-  display: inline-block; 
-  vertical-align: top; 
-  box-sizing: border-box; 
+  padding: 15px;
+  margin: 20px 40px;
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
 }
 .game-item button {
   color: #fff;
@@ -209,11 +219,95 @@ select, #price, #name, #submit_button {
   margin-left: 10%;
   margin-right: 10%;
 }
-.delete_button{
+.delete_button {
   background-color: #a30a0a;
-}  
-.edit_button{
+}
+.edit_button {
   background-color: #0061cf;
   margin-right: 20%;
 }
-
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.219);
+  padding-left: 35%;
+  padding-top: 20px;
+}
+.modal-content {
+  background-color: #fefefe;
+  padding: 25px;
+  border: 1px solid #888;
+  width: 30%;
+  height: auto;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: auto;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content select,
+.modal-content label {
+  width: 80%;
+  margin-left: 0px;
+  color: #1f1f1f;
+}
+.modal-content label {
+  width: 84%;
+}
+.modal-content select {
+  width: 84%;
+}
+.modal-content input[type="text"],
+.modal-content select {
+  height: 30px;
+  padding: 0px 8px;
+}
+.modal-content textarea {
+  padding: 8px 8px;
+}
+#edit-name,
+#edit-description,
+#edit-price,
+#edit-type {
+  margin-bottom: 15px;
+}
+.modal-button {
+  margin-top: 15px;
+  margin-bottom: 18px;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+#save_button,
+#cancel_button {
+  height: 35px;
+  width: 100px;
+  border-radius: 5px;
+  color: white;
+  border-style: none;
+}
+#save_button {
+  background-color: #0061cf;
+}
+#cancel_button {
+  background-color: #960404;
+}
