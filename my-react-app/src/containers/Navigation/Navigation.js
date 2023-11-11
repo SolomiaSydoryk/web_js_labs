@@ -6,18 +6,18 @@ const Navigation = () => (
   <LinkingWrapper>
     <div className="nav">
       <div className="nav-element">
-        <NavLink exact to="/" activeClassName="selected">
+        <NavLink exact to="/">
           Home
         </NavLink>
       </div>
       <div className="nav-element">
-        <NavLink exact to="/catalog" activeClassName="selected">
+        <NavLink exact to="/catalog">
           Catalog
         </NavLink>
       </div>
       <div className="nav-element">
-        <NavLink exact to="/contact" activeClassName="selected">
-          Contact
+        <NavLink exact to="/contacts">
+          Contacts
         </NavLink>
       </div>
     </div>
