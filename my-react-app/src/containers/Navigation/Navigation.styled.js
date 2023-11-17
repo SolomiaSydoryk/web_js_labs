@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LinkingWrapper = styled.div`
   .nav {
@@ -6,10 +6,9 @@ export const LinkingWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 5%;
+    margin-left: 6%;
     height: 75px;
   }
-
 
   .nav-element {
     display: flex;
@@ -18,15 +17,19 @@ export const LinkingWrapper = styled.div`
     font-weight: bold;
     margin: 10px 40px;
     font-size: 22px;
-   }
+  }
 
-    a {
-      color: #c9490e;
-      text-decoration: none;
-      transition: all 0.3s;
+  a {
+    color: #c9490e;
+    text-decoration: none;
+    transition: all 0.3s;
 
-      &:hover {
-        color: #590303;
-      }
+    &:hover {
+      color: #590303;
     }
-`
+  }
+
+  .nav-element a.active {
+    color: #590303;
+  }
+`;
