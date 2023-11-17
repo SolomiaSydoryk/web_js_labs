@@ -24,7 +24,9 @@ const CardItem = (props) => (
       }
     >
       <Meta
-        title={<h2 style={{ fontSize: "24px", marginBottom: 0}}>{props.title}</h2>}
+        title={
+          <h2 style={{ fontSize: "24px", marginBottom: 0 }}>{props.title}</h2>
+        }
         description={[
           <p style={{ fontSize: "18px", color: "#4f4f4f" }}>{props.type}</p>,
           <p style={{ fontSize: "16px", color: "#4f4f4f" }}>{props.text}</p>,

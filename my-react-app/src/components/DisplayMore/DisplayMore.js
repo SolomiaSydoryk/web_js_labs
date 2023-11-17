@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   PriceSection,
   SectionWrapper,
@@ -6,23 +6,37 @@ import {
   StyledDescSection,
   StyledType,
   StyledText,
+  StyledButton,
+  CustomLink,
 } from "./DisplayMore.styled";
 
-const DisplayMore = (props) => {
-  const { game } = props;
+const DisplayMore = ({ game }) => {
+  const [gameData, setGameData] = useState(null);
+
+  useEffect(() => {
+    setGameData(game);
+  }, [game]);
+
   return (
     <SectionWrapper>
-      <StyledImage>
-        <img src={game.image} alt="#" />
-      </StyledImage>
-      <StyledDescSection>
-        <h2>{game.title}</h2>
-        <StyledType>{game.type}</StyledType>
-        <StyledText>{game.text}</StyledText>
-        <PriceSection>
-          <h5 style={{ marginRight: "20px" }}>Price:</h5>${game.price}
-        </PriceSection>
-      </StyledDescSection>
+      {gameData && (
+        <>
+          <StyledImage>
+            <img src={gameData.image} alt="#" />
+          </StyledImage>
+          <StyledDescSection>
+            <h2>{gameData.title}</h2>
+            <StyledType>{gameData.type}</StyledType>
+            <StyledText>{gameData.text}</StyledText>
+            <PriceSection>
+              <h5 style={{ marginRight: "20px" }}>Price:</h5>${gameData.price}
+              <CustomLink exact to="/catalog" activeClassName="selected">
+                <StyledButton>GO BACK</StyledButton>
+              </CustomLink>
+            </PriceSection>
+          </StyledDescSection>
+        </>
+      )}
     </SectionWrapper>
   );
 };
