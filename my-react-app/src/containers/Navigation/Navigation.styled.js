@@ -6,7 +6,7 @@ export const LinkingWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 6%;
+    margin-left: 5%;
     height: 75px;
   }
 

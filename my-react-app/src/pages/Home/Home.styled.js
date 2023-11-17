@@ -33,4 +33,18 @@ export const CardWrapper = styled.div`
   width: 100%;
   margin-top: 60px;
 `
+export const StyledButton = styled.button`
+  background: transparent;
+  border-radius: 10px;
+  border: 1px solid #c9490e;
+  color: #c9490e;
+  margin-top: 20px;
+  width: 130px;
+  height: 40px;
+  font-size: 16px;
+`
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
