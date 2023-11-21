@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SectionWrapper = styled.div`
   margin-top: 30px;
@@ -26,11 +26,31 @@ export const StyledText = styled.div`
     font-size: 40px;
     color: black;
   }
-`
+`;
 export const CardWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin-top: 60px;
-`
+`;
+export const StyledButton = styled.button`
+  background: transparent;
+  border-radius: 10px;
+  border: 1px solid #c9490e;
+  color: #c9490e;
+  margin-top: 20px;
+  width: 130px;
+  height: 40px;
+  font-size: 17px;
+  transition: all 0.3s;
 
+  &:hover {
+    color: #fff;
+    background-color: #c9490e;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;

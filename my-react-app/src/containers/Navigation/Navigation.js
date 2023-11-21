@@ -16,8 +16,8 @@ const Navigation = () => (
         </NavLink>
       </div>
       <div className="nav-element">
-        <NavLink exact to="/contacts">
-          Contacts
+        <NavLink exact to="/more">
+          More
         </NavLink>
       </div>
     </div>

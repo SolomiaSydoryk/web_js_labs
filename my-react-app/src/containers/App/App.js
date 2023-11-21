@@ -5,6 +5,7 @@ import Navigation from "../Navigation/Navigation";
 import Home from "../../pages/Home/Home";
 import Catalog from "../../pages/Catalog/Catalog";
 import Footer from "./Footer/Footer";
+import MorePage from "../../pages/More/More";
 
 const App = () => {
   return (
@@ -12,10 +13,10 @@ const App = () => {
       <Layout />
       <Navigation />
       <Routes>
-            <Route path="/" element = {<Home/>} />
-            <Route path="/catalog" element ={<Catalog/>} />
-            <Route path="/contacts" element ={<div>It`s contacts page</div>} />
-        </Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/more/:id" element={<MorePage />} />
+      </Routes>
       <Footer />
     </div>
   );

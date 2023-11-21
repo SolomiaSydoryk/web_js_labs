@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 36px;
+    margin-top: 30px;
     text-align: center;
     p { 
         color: #8E8E93;
@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
     }
     h1 {
         margin-top: 10px;
+        margin-right: 25px;
     }
     span { 
         margin: 0 10px;
