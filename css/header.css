@@ -1,0 +1,55 @@
+.container {
+    margin: 0 auto;
+    max-width: 1600px;
+  }
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 190px;
+    margin-top: 30px;
+    margin-left: 191px;
+  
+  }
+  .header__nav {
+    margin-left: auto;
+  }
+  .header__nav ul {
+    display: flex;
+  }
+  .header__nav-item {
+    margin-right: 34px;
+    font-size: 16px;
+  }
+  .button-login,
+  .button-register {
+    width: 132px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-login {
+    border: 1px solid #fb8f1d;
+    color: #fb8f1d;
+    background: transparent;
+    margin-right: 18px;
+  }
+  .button-register {
+    background: #fb8f1d;
+    color: #fff;
+    border: none;
+  }
+  .header__nav-item a {
+    color: #b8becd; /* Сірий колір для всіх посилань */
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .header__nav-item a#home {
+    color: #202336; /* Синій колір для Home */
+  }

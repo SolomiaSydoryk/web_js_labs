@@ -1,0 +1,40 @@
+.logo-container {
+    margin-left: 190px;
+    margin-right: 135px;
+    margin-top: 35px;
+    margin-bottom: 25px;
+    width: 1240px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-position: left top;
+    background-repeat: no-repeat;
+    margin-block-start: 15px;
+  }
+  .organization {
+    width: 391px;
+    color: #848484;
+    font-family: "Mulish", sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+  .footer__rectangle {
+    width: 1219px;
+    height: 0.6px;
+    flex-shrink: 0;
+    background: #c4c4c4;
+    margin-left: 190px;
+    margin-right: 190px;
+  }
+  .icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .icons img {
+    margin-right: 35px;
+    padding-top: 35px;
+    height: 22px;
+  }
