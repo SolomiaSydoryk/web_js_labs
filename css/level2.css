@@ -1,0 +1,49 @@
+.level2__container {
+    background-image: url(../images/thousand-02\ 1.svg);
+    background-position: left top;
+    background-repeat: no-repeat;
+    margin-top: 110px;
+    margin-left: 115px;
+  }
+  .level2 {
+    margin: 0 auto;
+    max-width: 1600px;
+    height: 780px;
+    background: #f8f8f8;
+    display: flex;
+  }
+  .title2,
+  .title3 {
+    width: 481px;
+    color: #000;
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 50px;
+  }
+  .title2 {
+    margin-top: 110px;
+    margin-left: 840px;
+  }
+  .paragraph {
+    color: #7d7987;
+    font-family: "Mulish", sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-left: 850px;
+    margin-right: 140px;
+  }
+  .button-learn-more {
+    width: 164px;
+    height: 48px;
+    flex-shrink: 0;
+    margin-top: 30px;
+    border-radius: 8px;
+    background: #fb8f1d;
+    margin-left: 850px;
+    border: none;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+  }
