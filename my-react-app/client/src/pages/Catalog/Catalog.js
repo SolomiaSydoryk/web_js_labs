@@ -65,8 +65,7 @@ const Catalog = () => {
   }, [filter]);
 
   const applyFilter = useCallback(() => {
-    setFilter((prevFilter) => ({
-      ...prevFilter,
+    setFilter(() => ({
       sortGame,
       searchGame,
     }));
@@ -95,7 +94,7 @@ const Catalog = () => {
           enterButton={searchIcon}
           size="large"
           onChange={(e) => setSearchGame(e.target.value)}
-          onSearch={() => searchGame && applyFilter()}
+          onSearch={applyFilter}
         />
       </Space>
       <HorizontalLine />

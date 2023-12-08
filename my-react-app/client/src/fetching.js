@@ -1,15 +1,17 @@
 import axios from "axios";
 
+const LOCALHOST = "http://localhost:8080";
+
 export const getGameList = (filterCondition) => {
-  return axios.get("http://localhost:8080/api/game", {
+  return axios.get(LOCALHOST +"/api/game", {
     params: filterCondition,
   });
 };
 
 export const getDefaultGameList = () => {
-  return axios.get("http://localhost:8080/api/games");
+  return axios.get(LOCALHOST +"/api/games");
 };
 
 export const getMoreGameInfo = (gameId) => {
-  return axios.get(`http://localhost:8080/api/game/${gameId}`);
+  return axios.get(LOCALHOST +`/api/game/${gameId}`);
 };

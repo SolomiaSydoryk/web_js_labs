@@ -20,6 +20,9 @@ const Navigation = () => (
           More
         </NavLink>
       </div>
+      <div className="nav-element">
+                    <NavLink exact to="/cart" activeClassName="selected">Cart</NavLink>
+      </div>
     </div>
   </LinkingWrapper>
 );
