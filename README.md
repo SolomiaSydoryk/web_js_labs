@@ -29,4 +29,4 @@
 Посилання на вітку [тут](https://github.com/SolomiaSydoryk/web_js_labs/tree/lab9)
 
 Лабораторна робота №10
-Посилання на вітку тут
+Посилання на вітку [тут](https://github.com/SolomiaSydoryk/web_js_labs/pull/10)
