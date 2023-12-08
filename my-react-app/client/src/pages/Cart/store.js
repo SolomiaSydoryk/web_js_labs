@@ -1,4 +1,11 @@
-import { reducer } from "./reducers";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
+import { persistedReducer } from './reducers';
 
-export const store = configureStore({reducer});
+const store = configureStore({
+  reducer: persistedReducer,
+});
+
+const persistor = persistStore(store);
+
+export { store, persistor };

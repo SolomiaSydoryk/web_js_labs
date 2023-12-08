@@ -1,3 +1,6 @@
+import { persistReducer } from 'redux-persist';
+import persistConfig from './persistConfig';
+
 const defaultState = {
   gameList: [],
 };
@@ -6,7 +9,7 @@ const findIndexByName = (arr, name) => {
   return arr.findIndex((item) => item.name === name);
 };
 
-export const reducer = (state = defaultState, action) => {
+const rootReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "ADD_GAME":
       const foundIndex = findIndexByName(state.gameList, action.payLoad.name);
@@ -41,7 +44,16 @@ export const reducer = (state = defaultState, action) => {
           return game;
         }),
       };
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        gameList: state.gameList.filter(
+          (game) => game.name !== action.payLoad.name
+        ),
+      };
     default:
       return state;
   }
 };
+
+export const persistedReducer = persistReducer(persistConfig, rootReducer);

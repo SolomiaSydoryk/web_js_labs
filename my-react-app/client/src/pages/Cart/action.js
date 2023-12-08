@@ -13,3 +13,10 @@ export const decrementCount = (game) => {
         payLoad: { name: game },
     };
 };
+
+export const removeFromCart = (game) => {
+    return {
+        type: "REMOVE_FROM_CART",
+        payLoad: { name: game },
+    };
+};

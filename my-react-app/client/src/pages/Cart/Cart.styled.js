@@ -28,7 +28,7 @@ export const CountButton = styled.div `
 `
 
 export const HorizontalLine = styled.hr`
-  width: 100%;
+  width: 99%;
   border-bottom: none;
   border-top: 2px solid #e1e1e1;
   margin-bottom: 30px;

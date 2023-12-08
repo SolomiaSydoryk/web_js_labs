@@ -8,7 +8,7 @@ import {
 } from "./Cart.styled";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { incrementCount, decrementCount } from "./action";
+import { incrementCount, decrementCount, removeFromCart } from "./action";
 import { useState, useEffect } from "react";
 import { Button } from "antd";
 import dataCard from "../../components/CardData/CardData";
@@ -26,12 +26,26 @@ const Cart = () => {
   }, [gameArray]);
   const dispatch = useDispatch();
 
+  const handleDecrement = (name) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this game?"
+    );
+    if (confirmed) {
+      dispatch(decrementCount(name));
+    }
+  };
+
   const handleIncrement = (name) => {
     dispatch(incrementCount(name));
   };
 
-  const handleDecrement = (name) => {
-    dispatch(decrementCount(name));
+  const handleRemoveFromCart = (name) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this game from your cart?"
+    );
+    if (confirmed) {
+      dispatch(removeFromCart(name));
+    }
   };
 
   const filteredGames = gameArray.filter((game) => game.count > 0);
@@ -60,6 +74,7 @@ const Cart = () => {
               <Button onClick={() => handleIncrement(game.name)}>+</Button>
             </CountButton>
             <h3>${game.price}</h3>
+            <button onClick={() => handleRemoveFromCart(game.name)}>✖</button>
             <HorizontalLine style={{ marginTop: "30px" }} />
           </Content>
         </div>
