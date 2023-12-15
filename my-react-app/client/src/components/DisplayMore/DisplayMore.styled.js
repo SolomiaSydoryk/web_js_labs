@@ -62,7 +62,7 @@ export const StyledButton = styled.div`
   height: 35px;
   font-size: 18px;
   text-decoration: none;
-  margin-left: 140px;
+  margin-right: 50px;
   transition: all 0.3s;
 
   &:hover {
@@ -73,4 +73,53 @@ export const StyledButton = styled.div`
 
 export const CustomLink = styled(NavLink)`
   text-decoration: none;
+`;
+
+export const StyledButtonMini = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #c9490e;
+  border-radius: 10px;
+  color: #fff;
+  width: 100px;
+  height: 35px;
+  font-size: 17px;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #f7611b;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModalButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #c9490e;
+  border-radius: 10px;
+  color: #fff;
+  width: 180px;
+  height: 35px;
+  font-size: 17px;
+  text-decoration: none;
+  margin-right: 15px;
+  margin-left: 20px;
+  margin-top: 15px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #f7611b;
+  }
 `;
